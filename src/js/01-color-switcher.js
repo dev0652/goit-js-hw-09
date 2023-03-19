@@ -13,13 +13,15 @@ function startColorChange() {
   if (!intervalId) {
     intervalId = setInterval(changeBgColor, 1000);
     refs.startBtn.disabled = true;
+    refs.stopBtn.disabled = false;
   }
 }
 function stopColorChange() {
   clearInterval(intervalId);
   intervalId = null;
-  refs.body.removeAttribute('style');
+  // refs.body.removeAttribute('style');
   refs.startBtn.disabled = false;
+  refs.stopBtn.disabled = true;
 }
 
 function changeBgColor(color = getRandomHexColor()) {
