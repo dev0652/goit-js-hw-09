@@ -17,6 +17,19 @@ img {
   max-width: 100%;
 }
 
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  cursor: pointer;
+  font-family: inherit;
+  text-align: center;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
 .btn-cnt {
   display: flex;
   align-items: center;
