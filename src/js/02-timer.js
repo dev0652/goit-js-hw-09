@@ -5,7 +5,7 @@ import 'flatpickr/dist/themes/material_orange.css';
 
 import Notiflix from 'notiflix';
 
-refs = {
+const refs = {
   btn: document.querySelector('button[data-start]'),
   picker: document.querySelector('#datetime-picker'),
 
