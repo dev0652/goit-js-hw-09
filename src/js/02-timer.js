@@ -83,10 +83,8 @@ function updateTimer({ days, hours, minutes, seconds }) {
 
 // Start countdown
 function startCountdown() {
-  setInterval(handler, 1000);
-  refs.btn.disabled = true;
-
-  function handler() {
+  setInterval(() => {
     updateTimer(convertMs(timerFeed - Date.now()));
-  }
+  }, 1000);
+  refs.btn.disabled = true;
 }
