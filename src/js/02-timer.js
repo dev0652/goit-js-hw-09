@@ -74,7 +74,7 @@ function convertMs(ms) {
 }
 
 // Print the remaining time to screen
-function updateTimer({ days = 00, hours = 00, minutes = 00, seconds = 00 }) {
+function updateTimer({ days, hours, minutes, seconds }) {
   refs.days.textContent = days;
   refs.hours.textContent = hours;
   refs.minutes.textContent = minutes;
