@@ -77,13 +77,9 @@ let intervalId = null;
 
 function startCountdown() {
   intervalId = setInterval(handler, 1000);
+  refs.btn.disabled = true;
 
   function handler() {
-    const tgtSeconds = timerFeed;
-    const currSeconds = Date.now();
-
-    const difference = convertMs(tgtSeconds - currSeconds);
-
-    updateTimer(difference);
+    updateTimer(convertMs(timerFeed - Date.now()));
   }
 }
