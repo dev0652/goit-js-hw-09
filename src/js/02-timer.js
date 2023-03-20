@@ -6,9 +6,15 @@ import { Ukrainian } from 'flatpickr/dist/l10n/uk.js';
 refs = {
   btn: document.querySelector('button[data-start]'),
   picker: document.querySelector('#datetime-picker'),
+
+  days: document.querySelector('.value[data-days]'),
+  hours: document.querySelector('.value[data-hours]'),
+  minutes: document.querySelector('.value[data-minutes]'),
+  seconds: document.querySelector('.value[data-seconds]'),
 };
 
 refs.btn.disabled = true;
+let timerFeed = null;
 
 const flatpickrOptions = {
   enableTime: true,
@@ -19,15 +25,65 @@ const flatpickrOptions = {
   locale: Ukrainian,
 
   onClose(selectedDates, dateStr, instance) {
-    const selectedDate = selectedDates[0];
+    const target = selectedDates[0].getTime();
+    const current = instance.config.defaultDate.getTime();
+    const difference = convertMs(target - current);
 
-    if (selectedDate.getTime() <= instance.config.defaultDate.getTime()) {
+    if (target <= current) {
       alert('Please choose a date in the future');
       return;
     }
 
+    faceFeed = difference; // Object
+    timerFeed = target;
+
+    updateTimer(faceFeed);
     refs.btn.disabled = false;
+    refs.btn.addEventListener('click', startCountdown);
   },
 };
 
 flatpickr(refs.picker, flatpickrOptions);
+
+function convertMs(ms) {
+  // Number of milliseconds per unit of time
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
+
+  // Remaining days
+  const days = Math.floor(ms / day);
+  // Remaining hours
+  const hours = Math.floor((ms % day) / hour);
+  // Remaining minutes
+  const minutes = Math.floor(((ms % day) % hour) / minute);
+  // Remaining seconds
+  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+
+  return { days, hours, minutes, seconds };
+}
+
+// Print the remaining time to screen
+function updateTimer({ days = 00, hours = 00, minutes = 00, seconds = 00 }) {
+  refs.days.textContent = days;
+  refs.hours.textContent = hours;
+  refs.minutes.textContent = minutes;
+  refs.seconds.textContent = seconds;
+}
+
+// Start countdown
+let intervalId = null;
+
+function startCountdown() {
+  intervalId = setInterval(handler, 1000);
+
+  function handler() {
+    const tgtSeconds = timerFeed;
+    const currSeconds = Date.now();
+
+    const difference = convertMs(tgtSeconds - currSeconds);
+
+    updateTimer(difference);
+  }
+}
