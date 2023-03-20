@@ -1,7 +1,9 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import 'flatpickr/dist/themes/material_orange.css';
-import { Ukrainian } from 'flatpickr/dist/l10n/uk.js';
+// import { Ukrainian } from 'flatpickr/dist/l10n/uk.js';
+
+import Notiflix from 'notiflix';
 
 refs = {
   btn: document.querySelector('button[data-start]'),
@@ -22,7 +24,7 @@ const flatpickrOptions = {
   // defaultDate: new Date('2023-04-18 00:00'),
   defaultDate: new Date(),
   minuteIncrement: 1,
-  locale: Ukrainian,
+  // locale: Ukrainian,
 
   onClose(selectedDates, dateStr, instance) {
     const target = selectedDates[0].getTime();
@@ -30,16 +32,15 @@ const flatpickrOptions = {
     const difference = convertMs(target - current);
 
     if (target <= current) {
-      alert('Please choose a date in the future');
+      Notiflix.Notify.failure('Please choose a date in the future');
       return;
     }
 
-    faceFeed = difference; // Object
     timerFeed = target;
-
-    updateTimer(faceFeed);
+    updateTimer(difference);
     refs.btn.disabled = false;
-    refs.btn.addEventListener('click', startCountdown);
+    refs.btn.addEventListener('click', startCountdown, { once: true });
+    Notiflix.Notify.success('Now you can start the countdown');
   },
 };
 
