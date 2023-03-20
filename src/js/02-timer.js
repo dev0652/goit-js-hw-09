@@ -44,12 +44,14 @@ const flatpickrOptions = {
   },
 };
 
+// Initiate a flatpickr instance
 flatpickr(refs.picker, flatpickrOptions);
 
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
 
+// Convert milliseconds to time object
 function convertMs(ms) {
   // Number of milliseconds per unit of time
   const second = 1000;
