@@ -39,6 +39,11 @@ const flatpickrOptions = {
 
     timerFeed = target;
     updateTimer(difference);
+
+    refs.values.forEach(value => {
+      value.style.color = '';
+    });
+
     refs.btn.disabled = false;
     refs.btn.addEventListener('click', onStartBtnClick, { once: true });
     Notiflix.Notify.success('You can start the countdown now');
