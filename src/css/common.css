@@ -30,22 +30,28 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.btn-cnt {
+.btn-cnt, .timer {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
   position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%)
+  top: 30%;
+  transform: translateX(-50%)
+}
+
+.btn-cnt {
+  gap: 10px;
+}
+.timer {
+  gap: 20px;
 }
 
 .btn {
-  padding: 10px 50px;
+  padding: 5px 30px;
   border-radius: 50px;
   border: 2px solid olive;
-  font-size: 1.5em;
+  font-size: 1.3em;
     background-color: beige;
 }
 
@@ -54,15 +60,6 @@ button:disabled {
 }
 
 /* Timer */
-
-#datetime-picker {
-  margin-bottom: 20px;
-}
-
-.timer {
-  display: flex;
-  gap: 20px;
-}
 
 .field {
   display: flex;
@@ -73,14 +70,16 @@ button:disabled {
 
 .label {
   text-transform: uppercase;
-  font-size: 0.7em;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: gray;
     /* background-color: lightgray; */
 
 }
 
 .value {
   text-transform: uppercase;
-  font-size: 2em;
+  font-size: 4em;
     /* background-color: lightcyan; */
     line-height: 1.2;
 
