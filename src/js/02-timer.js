@@ -39,8 +39,8 @@ const flatpickrOptions = {
     timerFeed = target;
     updateTimer(difference);
     refs.btn.disabled = false;
-    refs.btn.addEventListener('click', startCountdown, { once: true });
-    Notiflix.Notify.success('Now you can start the countdown');
+    refs.btn.addEventListener('click', onStartBtnClick, { once: true });
+    Notiflix.Notify.success('You can start the countdown now');
   },
 };
 
@@ -82,9 +82,17 @@ function updateTimer({ days, hours, minutes, seconds }) {
 }
 
 // Start countdown
-function startCountdown() {
-  setInterval(() => {
+function onStartBtnClick() {
+  refs.btn.disabled = true;
+
+  const timerInterval = setInterval(() => {
+    //
+    if (timerFeed - Date.now() <= 0) {
+      clearInterval(timerInterval);
+      Notiflix.Notify.success('The countdown has reached zero!');
+      return;
+    }
+
     updateTimer(convertMs(timerFeed - Date.now()));
   }, 1000);
-  refs.btn.disabled = true;
 }
