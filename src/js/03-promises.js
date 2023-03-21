@@ -10,10 +10,6 @@ function onSubmit(event) {
     elements: { delay, step, amount },
   } = event.currentTarget;
 
-  //  console.log(event.currentTarget.elements.delay.value);
-  //  console.log(event.currentTarget.elements.step.value);
-  //  console.log(event.currentTarget.elements.amount.value);
-
   for (let i = 0; i < amount.value; i++) {
     const position = i + 1;
     const currDelay = Number(delay.value) + step.value * i;
@@ -30,6 +26,8 @@ function onSubmit(event) {
         );
       });
   }
+
+  form.reset();
 }
 
 function createPromise(position, delay) {
