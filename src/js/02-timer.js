@@ -13,6 +13,7 @@ const refs = {
   hours: document.querySelector('.value[data-hours]'),
   minutes: document.querySelector('.value[data-minutes]'),
   seconds: document.querySelector('.value[data-seconds]'),
+  values: document.querySelectorAll('.value'),
 };
 
 refs.btn.disabled = true;
@@ -89,7 +90,11 @@ function onStartBtnClick() {
     //
     if (timerFeed - Date.now() <= 0) {
       clearInterval(timerInterval);
+      refs.values.forEach(value => {
+        value.style.color = 'green';
+      });
       Notiflix.Notify.success('The countdown has reached zero!');
+
       return;
     }
 
